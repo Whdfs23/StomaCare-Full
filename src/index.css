@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-poppins: "Poppins", sans-serif;
+  --color-stoma-dark: #1a3c30;
+  --color-stoma-green: #458b68;
+  --color-stoma-light: #a8d5be;
+  --color-stoma-pale: #e8f5ee;
+  --color-stoma-accent: #40916C;
+}
+
+@layer base {
+  body {
+    @apply font-sans bg-gray-50 text-stoma-dark overflow-x-hidden;
+  }
+}
+
+@layer components {
+  /* Auth Styles from Asset */
+  .auth-container {
+    @apply relative w-[850px] h-[550px] bg-white rounded-[30px] shadow-2xl overflow-hidden m-5;
+  }
+
+  .form-box {
+    @apply absolute right-0 w-1/2 h-full bg-white flex items-center text-center p-10 z-[1] transition-all duration-700 ease-in-out;
+  }
+
+  .auth-container.active .form-box.login {
+    @apply translate-x-full opacity-0 invisible;
+  }
+
+  .auth-container.active .form-box.register {
+    @apply -translate-x-full opacity-100 visible;
+  }
+
+  .form-box.register {
+    @apply opacity-0 invisible;
+  }
+
+  .toggle-box {
+    @apply absolute w-full h-full pointer-events-none;
+  }
+
+  .toggle-box::before {
+    content: '';
+    @apply absolute left-[-250%] w-[300%] h-full bg-stoma-accent rounded-[97px] z-[2] transition-all duration-[1.8s] ease-in-out;
+  }
+
+  .auth-container.active .toggle-box::before {
+    @apply left-1/2;
+  }
+
+  .toggle-panel {
+    @apply absolute w-1/2 h-full text-white flex flex-col justify-center items-center z-[2] transition-all duration-700 ease-in-out pointer-events-auto;
+  }
+
+  .toggle-panel.toggle-left {
+    @apply left-0 delay-[1.2s];
+  }
+
+  .auth-container.active .toggle-panel.toggle-left {
+    @apply -left-1/2 delay-[0.6s];
+  }
+
+  .toggle-panel.toggle-right {
+    @apply -right-1/2 delay-[0.6s];
+  }
+
+  .auth-container.active .toggle-panel.toggle-right {
+    @apply right-0 delay-[1.2s];
+  }
+
+  /* Existing StomaCare Styles */
+  .nav-link {
+    @apply text-white/60 px-4 py-2 rounded-full transition-all duration-200 text-sm font-semibold no-underline inline-block hover:text-white hover:bg-white/10;
+  }
+
+  .nav-link-active {
+    @apply bg-white text-stoma-dark font-bold shadow-lg hover:bg-gray-100 hover:text-stoma-dark;
+  }
+
+  .btn-hover {
+    @apply transition-all duration-200 hover:-translate-y-1 active:translate-y-0;
+  }
+
+  .layered-card {
+    @apply relative bg-white rounded-[32px] p-10 z-10 flex flex-col min-h-[450px] transition-all duration-300 border border-gray-100 shadow-sm hover:-translate-y-1.5 hover:shadow-xl;
+  }
+
+  .card-icon {
+    @apply w-[52px] h-[52px] bg-stoma-light/20 rounded-2xl flex items-center justify-center mb-6 border border-stoma-light/60 text-stoma-green text-xl shrink-0;
+  }
+
+  .waktu-pill {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-full border-2 border-stoma-light/40 font-bold text-sm text-gray-400 cursor-pointer bg-white transition-all duration-200 hover:border-stoma-light hover:text-stoma-dark;
+  }
+
+  .waktu-pill.active {
+    @apply bg-stoma-dark border-stoma-dark text-white shadow-lg;
+  }
+
+  .gejala-item {
+    @apply flex items-center gap-2 p-3 bg-stoma-pale/30 border-2 border-stoma-light/40 rounded-xl cursor-pointer select-none transition-all duration-200 hover:border-stoma-light;
+  }
+
+  .gejala-item.checked {
+    @apply bg-stoma-pale border-stoma-green text-stoma-green;
+  }
+
+  /* Custom Slider */
+  .nyeri-slider {
+    @apply w-full h-2 rounded-lg appearance-none cursor-pointer outline-none;
+    background: linear-gradient(to right, #86efac, #facc15, #ef4444);
+  }
+
+  .nyeri-slider::-webkit-slider-thumb {
+    @apply appearance-none w-6 h-6 rounded-full bg-white border-[3px] border-stoma-green cursor-pointer shadow-md transition-transform duration-100 hover:scale-110;
+  }
+
+  .nyeri-slider::-moz-range-thumb {
+    @apply w-6 h-6 rounded-full bg-white border-[3px] border-stoma-green cursor-pointer shadow-md transition-transform duration-100 hover:scale-110;
+  }
+}
+
+@keyframes blobFloat {
+  0% { transform: scale(1) rotate(0deg); }
+  100% { transform: scale(1.03) rotate(1.5deg); }
+}
+
+@keyframes stomachFloat {
+  0% { transform: translateY(0px) rotate(-1deg); }
+  100% { transform: translateY(-18px) rotate(1deg); }
+}
+
+.corner-blob {
+  animation: blobFloat 8s ease-in-out infinite alternate;
+}
+
+.corner-stomach {
+  animation: stomachFloat 6s ease-in-out infinite alternate;
+}
